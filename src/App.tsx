@@ -1,9 +1,7 @@
+import Routes from "./components/routes/Routes";
+
 function App() {
-  return (
-    <>
-      <h1>hello</h1>
-    </>
-  );
+  return <Routes />;
 }
 
 export default App;
