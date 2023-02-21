@@ -1,7 +1,7 @@
-import Routes from "./components/routes/Routes";
+import Search from "./components/pages/search/search";
 
 function App() {
-  return <Routes />;
+  return <Search />;
 }
 
 export default App;
