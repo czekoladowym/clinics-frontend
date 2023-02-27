@@ -1,5 +1,7 @@
 import { useJsApiLoader } from "@react-google-maps/api";
-import LocationMap from "../locationMap/location";
+import { useMemo, useState } from "react";
+import LocationMap from "../../common/locationMap/location";
+import { Clinic } from "../../interfaces/interfaces";
 import {
   DetailsBlock,
   LogoHeader,
@@ -8,14 +10,20 @@ import {
   DetailsSelect,
   SelectBtn,
   MapBlock,
-} from "./detailsSearch";
+} from "./detailsStyles";
 import logoImg from "/icons/lambda.svg";
 
-const Details = () => {
+interface IProps {
+  clinics: Clinic[];
+  activeClinic: number;
+}
+
+const Details = ({ clinics, activeClinic }: IProps) => {
+  const [ariaActive, setAriaActive] = useState<boolean>(false);
   const API_KEY = import.meta.env.VITE_API_KEY;
   const centerApi = {
-    lat: 51.00307368241314,
-    lng: 3.7230193422867197,
+    lat: -35.2385141,
+    lng: 149.0610109,
   };
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -30,13 +38,26 @@ const Details = () => {
         </LogoHeader>
         <DetailsContent>
           <DetailsSelect>
-            <SelectBtn>Location</SelectBtn>
-            <SelectBtn>About</SelectBtn>
+            <SelectBtn onClick={() => setAriaActive(!ariaActive)}>
+              Location
+            </SelectBtn>
+            <SelectBtn onClick={() => setAriaActive(!ariaActive)}>
+              About
+            </SelectBtn>
           </DetailsSelect>
         </DetailsContent>
-        <MapBlock>
-          {isLoaded ? <LocationMap center={centerApi} /> : <h1>Sorry</h1>}
+        <MapBlock className={ariaActive ? "disable-area" : ""}>
+          {isLoaded ? (
+            <LocationMap clinics={clinics} activeClinic={activeClinic} />
+          ) : (
+            <p>Loading...</p>
+          )}
         </MapBlock>
+        <div className={ariaActive ? "visible" : "disable-area"}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
+          quam modi dignissimos temporibus sunt aut at vel ullam reiciendis
+          voluptates!
+        </div>
       </DetailsBlock>
     </>
   );

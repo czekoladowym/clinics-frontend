@@ -8,13 +8,13 @@ export const Home = styled.div`
   height: 100%;
   width: 100%;
 `;
-export const SearchContainer = styled.div`
+export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   flex: 1;
 `;
-export const SearchHeader = styled.div`
+export const HomeHeader = styled.div`
   position: relative;
   padding: 3.5rem 1.5rem 0 3.5rem;
   display: flex;
@@ -42,18 +42,7 @@ export const ScrollBlock = styled.div`
   max-height: 33.2rem;
   overflow-y: scroll;
 `;
-export const SearchResult = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: calc(100% - 1rem);
-  height: 100%;
-  padding: 0.5rem;
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  border-color: #555;
-`;
+
 export const ResultsContacts = styled.div`
   display: flex;
   flex-direction: row;
@@ -69,16 +58,7 @@ export const SearchImg = styled.img`
   top: 64px;
   left: 64px;
 `;
-export const CheckboxBlock = styled.label`
+export const CheckboxBlock = styled.div`
   display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-size: 16px;
+  margin: 16px 0 16px;
 `;

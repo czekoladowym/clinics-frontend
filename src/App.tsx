@@ -1,4 +1,4 @@
-import Search from "./components/pages/search/search";
+import Search from "./components/pages/home/home";
 
 function App() {
   return <Search />;
