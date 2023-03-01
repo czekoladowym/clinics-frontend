@@ -1,17 +1,19 @@
 export interface ResResponce {
-  citySlug: string;
-  cityName: string;
-  clinics: Clinic[];
-  suburbs: Suburbs[];
+  mapped: Clinic[];
 }
 export interface Clinic {
-  clinic: string;
-  url: string;
+  clinicName: string;
+  clinicSlug: string;
   address: string;
-  email: string | null;
-  phone: string;
   website: string;
+  phone: string;
+  suburb: string;
+  zip: string;
+  email: string;
   state: string;
+  city: string;
+  about: string;
+  url: string;
   location: Location;
 }
 export interface Suburbs {

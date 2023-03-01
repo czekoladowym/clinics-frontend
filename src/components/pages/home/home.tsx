@@ -18,17 +18,23 @@ import ClinicCard from "../clinicCard/ClinicCard";
 
 const Search = () => {
   const [searchRes, setSearchRes] = useState<Clinic[]>([]);
-  const [searchValue, setSearchValue] = useState<string>("Canberra");
+  // canberra default city
+  const [searchValue, setSearchValue] = useState<string>("Helensburgh");
   const [activeClinic, setActiveClinic] = useState<number>(0);
+  const [activeSelector, setActiveSelector] = useState<string>("City");
 
   const getSearchRes = useCallback(async () => {
     if (!searchRes) {
       return;
     }
+    const selector =
+      activeSelector == "Clinic Name"
+        ? "clinicName"
+        : activeSelector.toLowerCase();
     const res: AxiosResponse<ResResponce> = await axios.get(
-      `https://clinics-backend.onrender.com/cities/${searchValue.toLowerCase()}`
+      `https://clinics-backend.onrender.com/clinics/search?${selector}=${searchValue.toLowerCase()}`
     );
-    setSearchRes(res.data.clinics);
+    setSearchRes(res.data.mapped);
   }, [searchRes, searchValue]);
 
   useEffect(() => {
@@ -46,7 +52,13 @@ const Search = () => {
               onChange={(e) => setSearchValue(e.target.value)}
             ></SearchInput>
             <CheckboxBlock>
-              <Checkbox />
+              <Checkbox
+                activeSelector={activeSelector}
+                onChange={(value: string) => {
+                  setSearchValue("");
+                  setActiveSelector(value);
+                }}
+              />
             </CheckboxBlock>
           </HomeHeader>
           <ScrollBlock>

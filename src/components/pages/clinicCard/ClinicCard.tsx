@@ -12,7 +12,7 @@ interface ISearchProps {
 const ClinicCard = ({ clinic, onClick, isActive }: ISearchProps) => {
   return (
     <SearchResult onClick={onClick} isActive={isActive}>
-      <h3>{clinic.clinic}</h3>
+      <h3>{clinic.clinicName}</h3>
       <p>{clinic.address}</p>
       <ResultsContacts>
         <a href={clinic.website}>{clinic.website}</a>

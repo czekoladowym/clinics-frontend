@@ -12,7 +12,6 @@ import {
   ResResponce,
   Clinic,
 } from "../../interfaces/interfaces";
-import axios, { AxiosResponse } from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const containerStyle = {
@@ -26,7 +25,6 @@ interface ILocPrors {
 }
 
 const LocationMap = ({ clinics, activeClinic }: ILocPrors) => {
-  const [map, setMap] = useState(null);
   const mapRef = useRef(undefined);
   const clinicsLocs: Location[] = useMemo(() => {
     return clinics.map((clinic) => clinic.location);

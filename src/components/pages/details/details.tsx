@@ -2,6 +2,7 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
 import LocationMap from "../../common/locationMap/location";
 import { Clinic } from "../../interfaces/interfaces";
+import AboutClinic from "../aboutClinic/aboutClinic";
 import {
   DetailsBlock,
   LogoHeader,
@@ -19,16 +20,18 @@ interface IProps {
 }
 
 const Details = ({ clinics, activeClinic }: IProps) => {
-  const [ariaActive, setAriaActive] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<string>("map-tab");
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const centerApi = {
-    lat: -35.2385141,
-    lng: 149.0610109,
-  };
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY,
   });
+  const handleMap = () => {
+    setActiveTab("map-tab");
+  };
+  const handleAbout = () => {
+    setActiveTab("about-tab");
+  };
 
   return (
     <>
@@ -38,29 +41,31 @@ const Details = ({ clinics, activeClinic }: IProps) => {
         </LogoHeader>
         <DetailsContent>
           <DetailsSelect>
-            <SelectBtn onClick={() => setAriaActive(!ariaActive)}>
+            <SelectBtn
+              className={activeTab === "map-tab" ? "active" : ""}
+              onClick={handleMap}
+            >
               Location
             </SelectBtn>
-            <SelectBtn onClick={() => setAriaActive(!ariaActive)}>
+            <SelectBtn
+              className={activeTab === "about-tab" ? "active" : ""}
+              onClick={handleAbout}
+            >
               About
             </SelectBtn>
           </DetailsSelect>
         </DetailsContent>
-        <MapBlock className={ariaActive ? "disable-area" : ""}>
-          {isLoaded ? (
+        <MapBlock>
+          {activeTab == "map-tab" ? (
             <LocationMap clinics={clinics} activeClinic={activeClinic} />
           ) : (
-            <p>Loading...</p>
+            <AboutClinic aboutClinic={clinics[activeClinic]} />
           )}
         </MapBlock>
-        <div className={ariaActive ? "visible" : "disable-area"}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-          quam modi dignissimos temporibus sunt aut at vel ullam reiciendis
-          voluptates!
-        </div>
       </DetailsBlock>
     </>
   );
 };
 
+//  <LocationMap clinics={clinics} activeClinic={activeClinic} />                     <AboutClinic aboutClinic={clinics[activeClinic]} />
 export default Details;

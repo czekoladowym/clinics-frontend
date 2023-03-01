@@ -33,7 +33,7 @@ export const DetailsSelect = styled.div`
   flex-direction: row;
   width: 100%;
 `;
-export const SelectBtn = styled.button`
+export const SelectBtn = styled.li`
   :first-child {
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
@@ -42,6 +42,10 @@ export const SelectBtn = styled.button`
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
   }
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  border: 1px solid black;
   flex: 1;
   font-size: 1.5rem;
   border-width: 1px;

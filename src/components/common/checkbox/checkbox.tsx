@@ -1,9 +1,7 @@
 import { useState } from "react";
 
 const checkBoxes = ["City", "State", "ZIP", "Clinic Name", "Suburb"];
-const Checkbox = ({ label, checked, ...props }: any) => {
-  const [activeSelector, setActiveSelector] = useState<string>("City");
-
+const Checkbox = ({ onChange, activeSelector }: any) => {
   return (
     <div className="custom-radio">
       {checkBoxes.map((checkBox, i) => (
@@ -15,7 +13,7 @@ const Checkbox = ({ label, checked, ...props }: any) => {
             value={checkBox}
             checked={activeSelector == checkBox}
             onChange={(e) => {
-              setActiveSelector(e.target.value);
+              onChange(e.target.value);
             }}
           />
           <span className="checkmark"></span>

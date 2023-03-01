@@ -40,7 +40,7 @@ export const ScrollBlock = styled.div`
   margin: 0 0 0 3rem;
   font-size: 20px;
   max-height: 33.2rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 export const ResultsContacts = styled.div`
