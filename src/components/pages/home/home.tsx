@@ -33,7 +33,10 @@ const Search = () => {
         : activeSelector.toLowerCase();
     const res: AxiosResponse<ResResponce> = await axios
       .get(
-        `https://clinics-backend.onrender.com/clinics/search?${selector}=${searchValue.toLowerCase()}`
+        `https://clinics-backend.onrender.com/clinics/search?${selector}=${searchValue
+          .toLowerCase()
+          .split(" ")
+          .join("")}`
       )
       .catch((error: AxiosError) => {
         const res = error.response as AxiosResponse;
@@ -41,6 +44,8 @@ const Search = () => {
           ...res.data,
           mapped: [],
         };
+        console.log(searchValue);
+
         return res;
       });
 
