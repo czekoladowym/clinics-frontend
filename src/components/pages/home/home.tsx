@@ -10,6 +10,7 @@ import {
   HomeHeader,
   SearchImg,
   CheckboxBlock,
+  NoResultsBlock,
 } from "./homeStyle";
 import Details from "../details/details";
 import { Clinic, ResResponce } from "../../interfaces/interfaces";
@@ -72,20 +73,22 @@ const Search = () => {
               />
             </CheckboxBlock>
           </HomeHeader>
-          <ScrollBlock>
-            {searchRes.length ? (
-              searchRes.map((clinic, i) => (
+          {searchRes.length ? (
+            <ScrollBlock>
+              {searchRes.map((clinic, i) => (
                 <ClinicCard
                   key={i}
                   clinic={clinic}
                   onClick={() => setActiveClinic(i)}
                   isActive={i === activeClinic}
                 />
-              ))
-            ) : (
+              ))}
+            </ScrollBlock>
+          ) : (
+            <NoResultsBlock>
               <span className="no-results-block">No results</span>
-            )}
-          </ScrollBlock>
+            </NoResultsBlock>
+          )}
         </HomeContainer>
         {searchRes.length > 0 && (
           <Details clinics={searchRes} activeClinic={activeClinic} />

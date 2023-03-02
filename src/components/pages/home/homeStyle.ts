@@ -62,3 +62,6 @@ export const CheckboxBlock = styled.div`
   display: block;
   margin: 16px 0 16px;
 `;
+export const NoResultsBlock = styled(ScrollBlock)`
+  margin-right: 22px;
+`;
