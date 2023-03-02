@@ -30,7 +30,14 @@ const LocationMap = ({ clinics, activeClinic }: ILocPrors) => {
     return clinics.map((clinic) => clinic.location);
   }, [clinics]);
   const markers = useMemo(() => {
-    return clinicsLocs.map((loc, i) => <MarkerF position={loc} key={i} />);
+    return clinicsLocs.map((loc, i) => (
+      <MarkerF
+        position={loc}
+        key={i}
+        animation={google.maps.Animation.DROP}
+        icon={{ url: "", size: new google.maps.Size(15, 25) }}
+      />
+    ));
   }, clinicsLocs);
   const mapCenter: Location = useMemo(() => {
     return clinics[activeClinic].location;
