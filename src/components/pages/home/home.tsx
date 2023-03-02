@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import searchImg from "/icons/search.svg";
 import {
@@ -31,9 +31,19 @@ const Search = () => {
       activeSelector == "Clinic Name"
         ? "clinicName"
         : activeSelector.toLowerCase();
-    const res: AxiosResponse<ResResponce> = await axios.get(
-      `https://clinics-backend.onrender.com/clinics/search?${selector}=${searchValue.toLowerCase()}`
-    );
+    const res: AxiosResponse<ResResponce> = await axios
+      .get(
+        `https://clinics-backend.onrender.com/clinics/search?${selector}=${searchValue.toLowerCase()}`
+      )
+      .catch((error: AxiosError) => {
+        const res = error.response as AxiosResponse;
+        res.data = {
+          ...res.data,
+          mapped: [],
+        };
+        return res;
+      });
+
     setSearchRes(res.data.mapped);
   }, [searchRes, searchValue]);
 
@@ -62,17 +72,21 @@ const Search = () => {
             </CheckboxBlock>
           </HomeHeader>
           <ScrollBlock>
-            {searchRes.map((clinic, i) => (
-              <ClinicCard
-                key={i}
-                clinic={clinic}
-                onClick={() => setActiveClinic(i)}
-                isActive={i === activeClinic}
-              />
-            ))}
+            {searchRes.length ? (
+              searchRes.map((clinic, i) => (
+                <ClinicCard
+                  key={i}
+                  clinic={clinic}
+                  onClick={() => setActiveClinic(i)}
+                  isActive={i === activeClinic}
+                />
+              ))
+            ) : (
+              <span>No results</span>
+            )}
           </ScrollBlock>
         </HomeContainer>
-        {searchRes.length && (
+        {searchRes.length > 0 && (
           <Details clinics={searchRes} activeClinic={activeClinic} />
         )}
       </Home>

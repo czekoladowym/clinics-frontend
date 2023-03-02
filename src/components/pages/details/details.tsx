@@ -57,7 +57,9 @@ const Details = ({ clinics, activeClinic }: IProps) => {
         </DetailsContent>
         <MapBlock>
           {activeTab == "map-tab" ? (
-            <LocationMap clinics={clinics} activeClinic={activeClinic} />
+            isLoaded && (
+              <LocationMap clinics={clinics} activeClinic={activeClinic} />
+            )
           ) : (
             <AboutClinic aboutClinic={clinics[activeClinic]} />
           )}
