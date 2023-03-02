@@ -54,3 +54,12 @@ h2 {
 .active {
   background-color: #86ff86;
 }
+.no-results-block {
+  font-size: 30px;
+  font-weight: 600;
+  text-decoration: underline;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}

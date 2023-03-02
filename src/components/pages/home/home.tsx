@@ -18,8 +18,7 @@ import ClinicCard from "../clinicCard/ClinicCard";
 
 const Search = () => {
   const [searchRes, setSearchRes] = useState<Clinic[]>([]);
-  // canberra default city
-  const [searchValue, setSearchValue] = useState<string>("Helensburgh");
+  const [searchValue, setSearchValue] = useState<string>("");
   const [activeClinic, setActiveClinic] = useState<number>(0);
   const [activeSelector, setActiveSelector] = useState<string>("City");
 
@@ -46,10 +45,11 @@ const Search = () => {
 
     setSearchRes(res.data.mapped);
   }, [searchRes, searchValue]);
-
-  useEffect(() => {
-    getSearchRes();
-  }, [searchValue]);
+  const handleKeyDown = (event: { key: string }) => {
+    if (event.key === "Enter") {
+      getSearchRes();
+    }
+  };
 
   return (
     <>
@@ -60,6 +60,7 @@ const Search = () => {
             <SearchInput
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={handleKeyDown}
             ></SearchInput>
             <CheckboxBlock>
               <Checkbox
@@ -82,7 +83,7 @@ const Search = () => {
                 />
               ))
             ) : (
-              <span>No results</span>
+              <span className="no-results-block">No results</span>
             )}
           </ScrollBlock>
         </HomeContainer>

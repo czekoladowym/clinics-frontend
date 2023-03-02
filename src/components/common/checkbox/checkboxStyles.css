@@ -10,11 +10,14 @@
   margin-bottom: 12px;
   margin-right: 12px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
 }
 .container-radio input {
   position: absolute;
@@ -31,10 +34,11 @@
   height: 17px;
   width: 17px;
   background-color: #fff;
-  border: 1px solid #000000;
+  border: 1px solid #828282;
+  border-radius: 50%;
 }
 .container-radio:hover input ~ .checkmark {
-  border-color: rgb(0, 0, 0);
+  border-color: rgb(20, 19, 19);
 }
 
 .checkmark:after {
@@ -47,9 +51,9 @@
 }
 .container-radio .checkmark:after {
   content: "\2714";
-  font-size: 20px;
-  color: black;
+  font-size: 16px;
+  color: rgb(132, 130, 255);
   position: absolute;
-  right: 1px;
-  top: -5px;
+  right: 2px;
+  top: -3px;
 }
