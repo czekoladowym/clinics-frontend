@@ -20,6 +20,24 @@ export const HomeHeader = styled.div`
   display: flex;
   flex-direction: column;
 `;
+export const SeacrchField = styled.div`
+  display: flex;
+`;
+export const SearchBtn = styled.button`
+  height: 42px;
+  margin-left: 5px;
+  width: 40px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  background-color: #efefef;
+  :hover {
+    cursor: pointer;
+    background-color: #dad7d7;
+  }
+`;
+export const BtnImg = styled.img`
+  height: 24px;
+`;
 export const SearchInput = styled.input`
   flex: 1;
   padding: 0.5rem 0.5rem 0.5rem 2.5rem;
@@ -64,4 +82,5 @@ export const CheckboxBlock = styled.div`
 `;
 export const NoResultsBlock = styled(ScrollBlock)`
   margin-right: 22px;
+  font-size: 120px;
 `;

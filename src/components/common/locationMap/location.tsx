@@ -6,12 +6,7 @@ import {
   useJsApiLoader,
   MarkerF,
 } from "@react-google-maps/api";
-import {
-  Location,
-  ClinicsSearchRes,
-  ResResponce,
-  Clinic,
-} from "../../interfaces/interfaces";
+import { Location, Clinic } from "../../interfaces/interfaces";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const containerStyle = {
@@ -25,32 +20,38 @@ interface ILocPrors {
 }
 
 const LocationMap = ({ clinics, activeClinic }: ILocPrors) => {
-  const mapRef = useRef(undefined);
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: API_KEY,
+  });
+
   const clinicsLocs: Location[] = useMemo(() => {
     return clinics.map((clinic) => clinic.location);
   }, [clinics]);
-  const markers = useMemo(() => {
-    return clinicsLocs.map((loc, i) => (
-      <MarkerF position={loc} key={i} animation={google.maps.Animation.DROP} />
-    ));
-  }, clinicsLocs);
-  const mapCenter: Location = useMemo(() => {
+  const currentLocMarker: Location = useMemo(() => {
     return clinics[activeClinic].location;
   }, [clinics, activeClinic]);
-  const onLoad = useCallback(function callback(map: any) {
-    mapRef.current = map;
-  }, []);
-  const onUnmount = useCallback(function callback(map: any) {
-    mapRef.current = undefined;
-  }, []);
 
+  const markerLabel = useMemo(() => {
+    return clinics[activeClinic].clinicName;
+  }, [clinics, activeClinic]);
+
+  const markers = useMemo(() => {
+    return clinicsLocs.map((loc, i) => (
+      <MarkerF
+        position={loc}
+        key={i}
+        onClick={() => console.log(markerLabel)}
+        title={markerLabel}
+      />
+    ));
+  }, clinicsLocs);
+
+  if (!isLoaded) return <p>NO WAY</p>;
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={mapCenter}
+      center={currentLocMarker}
       zoom={12}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
     >
       {markers}
     </GoogleMap>

@@ -1,4 +1,5 @@
 export interface ResResponce {
+  pages: number;
   mapped: Clinic[];
 }
 export interface Clinic {
